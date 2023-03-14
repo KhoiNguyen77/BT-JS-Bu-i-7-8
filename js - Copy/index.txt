@@ -1,0 +1,10 @@
+
+document.getElementById('btnThemSo').onclick = function () {
+    let daySo = [];
+    var so = document.getElementById('so').value;
+    daySo.push(so);
+    console.log(daySo);
+}
+document.getElementById('btnInMang').onclick = function () {
+    document.getElementById('daySo').innerHTML = daySo;
+}
