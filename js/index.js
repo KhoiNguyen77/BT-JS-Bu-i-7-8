@@ -19,17 +19,17 @@ document.querySelector('#btnTong').onclick = function () {
     document.querySelector('#ket-qua-b1').innerHTML = tongSoDuong();
 }
 // Bài 2
-function demSoDuong() {
-    tongSo = 0;
-    for (var i = 0; i < daySo.length; i++) {
-        if (daySo[i] > 0) {
-            tongSo += 1;
+function demSoDuong(mangSo) {
+    var soDuong = 0;
+    for (var i = 0; i < mangSo.length; i++) {
+        if (mangSo[i] > 0) {
+            soDuong += 1;
         }
     }
-    return tongSo
+    return soDuong
 }
 document.querySelector('#btnDem').onclick = function () {
-    document.querySelector('#ket-qua-b2').innerHTML = demSoDuong();
+    document.querySelector('#ket-qua-b2').innerHTML = demSoDuong(daySo);
 }
 // Bài 3
 function soNhoNhat() {
@@ -166,15 +166,7 @@ document.querySelector('#btnTimSoNguyen').onclick = function () {
     document.querySelector('#ket-qua-b9').innerHTML = demSoNguyen;
 }
 // Bài 10
-function demSoDuong(mangSo) {
-    var soDuong = 0;
-    for (var i = 0; i < mangSo.length; i++) {
-        if (mangSo[i] > 0) {
-            soDuong += 1;
-        }
-    }
-    return soDuong
-}
+
 function demSoAm(mangSo) {
     var soAm = 0;
     for (var i = 0; i < mangSo.length; i++) {
