@@ -1,9 +1,8 @@
 let daySo = [];
 document.getElementById('btnThemSo').onclick = function () {
-    var so = +document.getElementById('so').value;
+    var so = +document.querySelector('#so').value;
     daySo.push(so);
-    console.log(daySo);
-    document.getElementById('daySo').innerHTML = daySo;
+    document.querySelector('#daySo').innerHTML = daySo;
 }
 
 // Bài 1
@@ -16,8 +15,8 @@ function tongSoDuong() {
     }
     return output
 }
-document.getElementById('btnTong').onclick = function () {
-    document.getElementById('ket-qua-b1').innerHTML = tongSoDuong();
+document.querySelector('#btnTong').onclick = function () {
+    document.querySelector('#ket-qua-b1').innerHTML = tongSoDuong();
 }
 // Bài 2
 function demSoDuong() {
@@ -29,8 +28,8 @@ function demSoDuong() {
     }
     return tongSo
 }
-document.getElementById('btnDem').onclick = function () {
-    document.getElementById('ket-qua-b2').innerHTML = demSoDuong();
+document.querySelector('#btnDem').onclick = function () {
+    document.querySelector('#ket-qua-b2').innerHTML = demSoDuong();
 }
 // Bài 3
 function soNhoNhat() {
@@ -42,8 +41,8 @@ function soNhoNhat() {
     }
     return soMin;
 }
-document.getElementById('btnMin').onclick = function () {
-    document.getElementById('ket-qua-b3').innerHTML = soNhoNhat();
+document.querySelector('#btnMin').onclick = function () {
+    document.querySelector('#ket-qua-b3').innerHTML = soNhoNhat();
 }
 // Bài 4
 var mangSoDuong = [];
@@ -55,14 +54,14 @@ function soDuongMin() {
     }
     var soDuongMin = mangSoDuong[0];
     for (var x = 0; x < mangSoDuong.length; x++) {
-        if (mangSoDuong[i] < soDuongMin) {
-            soDuongMin = mangSoDuong[i];
+        if (mangSoDuong[x] < soDuongMin) {
+            soDuongMin = mangSoDuong[x];
         }
     }
     return soDuongMin
 }
-document.getElementById('btnMinDuong').onclick = function () {
-    document.getElementById('ket-qua-b4').innerHTML = soDuongMin();
+document.querySelector('#btnMinDuong').onclick = function () {
+    document.querySelector('#ket-qua-b4').innerHTML = soDuongMin();
 }
 // Bài 5
 function soChanLast() {
@@ -80,13 +79,16 @@ function soChanLast() {
     }
     return soChanCuoi
 }
-document.getElementById('btnSoChan').onclick = function () {
-    document.getElementById('ket-qua-b5').innerHTML = soChanLast()
+document.querySelector('#btnSoChan').onclick = function () {
+    document.querySelector('#ket-qua-b5').innerHTML = soChanLast()
 };
 // Bài 6
-function swap(viTri1, viTri2) {
+function swap(viTri1, viTri2, outputB8) {
     var a = daySo[viTri1];
     var b = daySo[viTri2];
+    if (viTri1 >= daySo.length || viTri2 >= daySo.length) {
+        document.querySelector(outputB8).innerHTML = `Vui lòng chỉ nhập vị trí cần đổi trong giới hạn của mảng`;
+    }
     for (var i = 0; i < daySo.length; i++) {
         if (i === viTri1) {
             daySo[i] = b;
@@ -97,6 +99,104 @@ function swap(viTri1, viTri2) {
     }
     return daySo
 }
-document.getElementById('btnSwap').onclick = function () {
-    document.getElementById('ket-qua-b6').innerHTML = swap(+document.getElementById('vi-tri-1').value, +document.getElementById('vi-tri-2').value)
+document.querySelector('#btnSwap').onclick = function () {
+    swap(+document.querySelector('#vi-tri-1').value, +document.querySelector('#vi-tri-2').value, "#ket-qua-b8")
+}
+// Bài 7
+function sapXep() {
+    for (var i = 1; i < daySo.length; i++) {
+        for (var n = 0; n < i; n++) {
+            if (daySo[n] > daySo[i]) {
+                var a = daySo[n];
+                daySo[n] = daySo[i];
+                daySo[i] = a;
+            }
+        }
+    }
+    return daySo
+}
+document.querySelector('#btnSapXep').onclick = function () {
+    document.querySelector('#ket-qua-b7').innerHTML = sapXep()
+}
+// Bài 8
+function timSoNguyenTo(x) {
+    var soNT = true;
+    if (daySo[x] <= 1) {
+        soNT = false;
+        return soNT;
+    } else
+        for (i = 2; i < daySo[x]; i++) {
+            if (daySo[x] % i === 0) {
+                soNT = false;
+                break
+            }
+        }
+    return soNT;
+}
+document.querySelector('#btnTimSo').onclick = function () {
+    var indexSoNT = 0;
+    var isNguyenTo = false;
+    for (n = 0; n < daySo.length; n++) {
+        if (timSoNguyenTo(n)) {
+            indexSoNT = n;
+            isNguyenTo = true;
+            break;
+        }
+    }
+    if (isNguyenTo = true) {
+        document.querySelector('#ket-qua-b8').innerHTML = daySo[indexSoNT];
+    } else {
+        document.querySelector('#ket-qua-b8').innerHTML = -1;
+    }
+}
+// Bài 9
+let daySoThuc = [];
+document.querySelector('#btnThemSoThuc').onclick = function () {
+    var soThuc = +document.querySelector('#soThuc').value;
+    daySoThuc.push(soThuc);
+    document.querySelector('#daySoThuc').innerHTML = daySoThuc;
+}
+document.querySelector('#btnTimSoNguyen').onclick = function () {
+    var demSoNguyen = 0;
+    for (i = 0; i < daySoThuc.length; i++) {
+        if (Number.isInteger(daySoThuc[i])) {
+            demSoNguyen += 1;
+        }
+    }
+    document.querySelector('#ket-qua-b9').innerHTML = demSoNguyen;
+}
+// Bài 10
+function demSoDuong(mangSo) {
+    var soDuong = 0;
+    for (var i = 0; i < mangSo.length; i++) {
+        if (mangSo[i] > 0) {
+            soDuong += 1;
+        }
+    }
+    return soDuong
+}
+function demSoAm(mangSo) {
+    var soAm = 0;
+    for (var i = 0; i < mangSo.length; i++) {
+        if (mangSo[i] < 0) {
+            soAm += 1;
+        }
+    }
+    return soAm;
+}
+document.querySelector('#btnSoSanh').onclick = function () {
+    if (demSoDuong(daySo) > demSoDuong(daySoThuc)) {
+        document.querySelector('#ket-qua-b10-1').innerHTML = `Dãy số 1 có nhiều số dương hơn `
+    } else if (demSoDuong(daySo) === demSoDuong(daySoThuc)) {
+        document.querySelector('#ket-qua-b10-1').innerHTML = `2 dãy số có cùng số lượng số dương `
+    } else {
+        document.querySelector('#ket-qua-b10-1').innerHTML = `Dãy số 2 sau có nhiều số dương hơn `
+    }
+    if (demSoAm(daySo) > demSoAm(daySoThuc)) {
+        document.querySelector('#ket-qua-b10-2').innerHTML = `Dãy số 1 có nhiều số âm hơn `
+    } else if (demSoAm(daySo) === demSoAm(daySoThuc)) {
+        document.querySelector('#ket-qua-b10-2').innerHTML = `2 dãy số có cùng số lượng số âm `
+    } else {
+        document.querySelector('#ket-qua-b10-2').innerHTML = `Dãy số 2 sau có nhiều số âm hơn `
+    }
 }
